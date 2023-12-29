@@ -39,6 +39,7 @@ router.post('/', (req, res) => {
     }
     const file = new File({
       filename: req.file.filename,
+      realname: req.file.originalname,
       uuid: uuid4(),
       path: req.file.path,
       size: req.file.size

@@ -6,6 +6,10 @@ const fileSchema = new Schema({
     type: String,
     required: true
   },
+  realname: {
+    type: String,
+    required: true
+  },
   path: {
     type: String,
     required: true
