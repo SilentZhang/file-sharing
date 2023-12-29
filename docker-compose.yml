@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+
+  web:
+    build: ./web
+    ports:
+      - "4888:80"
+    env_file:
+      - .env
+    environment:
+      MONGODB_CONNECTION_URL: ${MONGODB_CONNECTION_URL}
+      APP_BASE_URL: ${APP_BASE_URL}
+      PORT: ${PORT}
+      ALLOWED_CLIENTS: ${ALLOWED_CLIENTS}
+    depends_on:
+      - db
+
+  db: 
+    build: ./mongodb
+    ports:
+      - "27017:27017"
+    env_file:
+      - .env
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}  
+      #MONGO_INITDB_DATABASE: ${MONGO_DB}
+    volumes:
+      - dbdata:/data/db
+
+volumes:
+  dbdata:
